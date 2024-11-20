@@ -1,0 +1,33 @@
+# Adicione logo após a Etapa 2
+ferrari_na_pista_inferior = False
+lamborghini_na_pista_inferior = False
+porsche_na_pista_inferior = False
+
+while True:
+    # Eventos e preenchimento da tela
+    tela.fill(branco)
+    tela.blit(fundo, (0, 0))
+
+    # Desenha os carros na tela
+    tela.blit(ferrari_vermelha, (movXFerrari, posYFerrari))
+    tela.blit(lamborghini_amarela, (movXLamborghini, posYLamborghini))
+    tela.blit(porsche_azul, (movXPorsche, posYPorsche))
+
+    # Movimentação dos carros e mudança para a pista inferior
+    if movXFerrari >= 1000 and not ferrari_na_pista_inferior:
+        movXFerrari = 0
+        posYFerrari = 350
+        ferrari_na_pista_inferior = True
+
+    if movXLamborghini >= 1000 and not lamborghini_na_pista_inferior:
+        movXLamborghini = 0
+        posYLamborghini = 480
+        lamborghini_na_pista_inferior = True
+
+    if movXPorsche >= 1000 and not porsche_na_pista_inferior:
+        movXPorsche = 0
+        posYPorsche = 420
+        porsche_na_pista_inferior = True
+
+    pygame.display.update()
+    clock.tick(60)
