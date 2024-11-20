@@ -1,0 +1,29 @@
+# Adicione logo após a Etapa 4
+background_final = pygame.image.load("assets/background_final.jpg")
+background_final = pygame.transform.scale(background_final, tamanho)
+somDaVitoria = False
+
+while True:
+    # Eventos e preenchimento da tela
+    tela.fill(branco)
+    if not acabou:
+        tela.blit(fundo, (0, 0))
+    else:
+        tela.blit(background_final, (0, 0))
+
+    # Movimento, cálculo de posição, e atualização de distância
+    # Verifica o vencedor
+    if (ferrari_na_pista_inferior and movXFerrari >= 900) or \
+       (lamborghini_na_pista_inferior and movXLamborghini >= 900) or \
+       (porsche_na_pista_inferior and movXPorsche >= 900):
+        vencedor_texto = fonte.render(f"{posicoes[0][1]} Ganhou!", True, branco)
+        tela.blit(background_final, (0, 0))  
+        tela.blit(vencedor_texto, (270, 70))  
+        acabou = True
+        pygame.mixer.music.stop()
+        if not somDaVitoria:
+            pygame.mixer.Sound.play(vitoria)
+            somDaVitoria = True
+
+    pygame.display.update()
+    clock.tick(60)
