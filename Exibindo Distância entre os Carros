@@ -1,0 +1,29 @@
+# Adicione logo após a Etapa 3
+fonte = pygame.font.Font("freesansbold.ttf", 30)
+
+while True:
+    # Eventos e preenchimento da tela
+    tela.fill(branco)
+    tela.blit(fundo, (0, 0))
+
+    # Exibe os carros e movimentação
+    # Cálculo das posições dos carros
+    posicoes = sorted([
+        (movXFerrari + (1000 if ferrari_na_pista_inferior else 0), "Ferrari Vermelha"),
+        (movXLamborghini + (1000 if lamborghini_na_pista_inferior else 0), "Lamborghini Amarela"),
+        (movXPorsche + (1000 if porsche_na_pista_inferior else 0), "Porsche Azul")
+    ], reverse=True)
+
+    distancia1_2 = posicoes[0][0] - posicoes[1][0]
+    distancia2_3 = posicoes[1][0] - posicoes[2][0]
+    
+    distancia1_2_metros = distancia1_2 / 8  
+    distancia2_3_metros = distancia2_3 / 8 
+
+    texto_ranking = fonte.render(f"1º: {posicoes[0][1]} - Distância para 2º: {distancia1_2_metros:.2f} m", True, preto)
+    texto_ranking2 = fonte.render(f"2º: {posicoes[1][1]} - Distância para 3º: {distancia2_3_metros:.2f} m", True, preto)
+    tela.blit(texto_ranking, (50, 20))
+    tela.blit(texto_ranking2, (50, 60))
+
+    pygame.display.update()
+    clock.tick(60)
